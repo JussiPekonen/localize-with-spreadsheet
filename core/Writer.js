@@ -1,5 +1,6 @@
 var fs = require('fs');
 var EOL = require('os').EOL;
+var path = require('path');
 
 var Writer = function () {
 
@@ -34,12 +35,10 @@ FileWriter.prototype.write = function (filePath, encoding, lines, transformer, o
 
 //https://gist.github.com/jrajav/4140206
 var writeFileAndCreateDirectoriesSync = function (filepath, content, encoding) {
-    var mkpath = require('mkpath');
-    var path = require('path');
-
     var dirname = path.dirname(filepath);
-    mkpath.sync(dirname);
-
+    if (!fs.existsSync(dirname)){
+        fs.mkdirSync(dirname);
+    }
     fs.writeFileSync(filepath, content, encoding);
 };
 

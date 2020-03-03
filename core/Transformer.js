@@ -14,7 +14,7 @@ var iOSTransformer = {
     },
     transformKeyValue: function (key, value, isIOSDictFormat) {
         // Format lines for iOS requirements
-        var normalizedValue = value.replace(/%newline%/gi, "\\n");
+        var normalizedValue = (""+value).replace(/%newline%/gi, "\\n");
         normalizedValue = normalizedValue.replace(/"/gi, '\\"');
         normalizedValue = normalizedValue.replace(/%([df])/gi, '\\%$1');
         normalizedValue = normalizedValue.replace(/%s/gi, '\\%@');

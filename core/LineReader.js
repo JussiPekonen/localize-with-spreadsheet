@@ -9,12 +9,17 @@ var LineReader = {
 };
 
 var GSReader = function (credentials, spreadsheetKey, sheetsFilter) {
-    if (credentials.private_key == null || credentials.client_email == null) {
+    this._sheet = new GoogleSpreadsheet(spreadsheetKey);
+    if (credentials.private_key != null && credentials.client_email != null) {
+        this._sheet.useServiceAccountAuth(credentials);
+    } else if (credentials.json != null) {
+        this._sheet.useServiceAccountAuth(credentials.json)
+    } else if (credentials.apiKey != null) {
+        this._sheet.useApiKey(credentials.apiKey);
+        throw Error('Using api key is not supported as loadCells method throws 401 for this auth method');
+    } else {
         throw Error('You must provide credentials which contains the private key and email address!');
     }
-
-    this._sheet = new GoogleSpreadsheet(spreadsheetKey);
-    this._sheet.useServiceAccountAuth(credentials);
     this._sheetsFilter = sheetsFilter;
 
     this._fetchDeferred = Q.defer();
