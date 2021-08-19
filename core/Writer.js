@@ -52,9 +52,8 @@ FileWriter.prototype.getTransformedLines = function (lines, transformer, isIOSDi
             } else {
                 if(isEmpty(line.getValue())) { 
                     console.log("%s - String for id: %s is empty", valueCol, line.getKey());
-                } else {
-                    valueToInsert += transformer.transformKeyValue(line.getKey(), line.getValue(), isIOSDictFormat) + getNewLineIfNecessary(i, lines);
                 }
+                valueToInsert += transformer.transformKeyValue(line.getKey(), line.getValue(), isIOSDictFormat) + getNewLineIfNecessary(i, lines);
             }
         }
     }
