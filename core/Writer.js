@@ -62,6 +62,8 @@ FileWriter.prototype.getTransformedLines = function (lines, transformer, isIOSDi
 }
 
 function isEmpty(str) {
+    // Special case, the data can be 0
+    if (str === 0) return false;
     return (!str || 0 === str.length);
 }
 
