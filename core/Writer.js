@@ -50,11 +50,11 @@ FileWriter.prototype.getTransformedLines = function (lines, transformer, isIOSDi
             if (line.isComment()) {
                 valueToInsert += EOL + transformer.transformComment(line.getComment()) + getNewLineIfNecessary(i, lines);
             } else {
-                if(isEmpty(line.getValue())) { 
+                /*if(isEmpty(line.getValue())) { 
                     console.log("%s - String for id: %s is empty", valueCol, line.getKey());
-                } else {
+                } else {*/
                     valueToInsert += transformer.transformKeyValue(line.getKey(), line.getValue(), isIOSDictFormat) + getNewLineIfNecessary(i, lines);
-                }
+                //}
             }
         }
     }
